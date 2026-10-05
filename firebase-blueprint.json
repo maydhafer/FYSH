@@ -1,0 +1,78 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "User profile information",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "format": "email", "maxLength": 256 },
+        "displayName": { "type": "string", "maxLength": 128 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email"]
+    },
+    "ConnectedAccount": {
+      "title": "Connected Account",
+      "description": "Connected third-party application account",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "appId": { "type": "string", "maxLength": 64 },
+        "appName": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "appId", "userId"]
+    },
+    "Automation": {
+      "title": "Automation Workflow",
+      "description": "User-configured automation workflow",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "triggerApp": { "type": "string", "maxLength": 64 },
+        "triggerEvent": { "type": "string", "maxLength": 64 },
+        "actionApp": { "type": "string", "maxLength": 64 },
+        "actionType": { "type": "string", "maxLength": 64 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "triggerApp", "actionApp"]
+    },
+    "AgentSession": {
+      "title": "Agent Session",
+      "description": "Composio MCP agent session for a user",
+      "type": "object",
+      "properties": {
+        "fishUserId": { "type": "string", "maxLength": 128 },
+        "composioUserId": { "type": "string", "maxLength": 128 },
+        "agentType": { "type": "string", "maxLength": 64 },
+        "composioSessionId": { "type": "string", "maxLength": 256 },
+        "status": { "type": "string", "enum": ["ACTIVE", "REVOKED"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "mcpUrl": { "type": "string" },
+        "mcpHeaders": { "type": "object" }
+      },
+      "required": ["fishUserId", "composioUserId", "agentType", "composioSessionId", "status", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "User profile document"
+    },
+    "/connectedAccounts/{accountId}": {
+      "schema": { "$ref": "#/entities/ConnectedAccount" },
+      "description": "Connected third-party accounts for integrations"
+    },
+    "/automations/{automationId}": {
+      "schema": { "$ref": "#/entities/Automation" },
+      "description": "Automation workflows created by users"
+    },
+    "/agentSessions/{sessionId}": {
+      "schema": { "$ref": "#/entities/AgentSession" },
+      "description": "Saved MCP agent sessions"
+    }
+  }
+}

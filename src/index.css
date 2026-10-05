@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'P22 Mackinac W01 Book';
+  src: url('https://db.onlinewebfonts.com/t/9d4d074c9335825a23cce178ee03b498.woff2') format('woff2'),
+       url('https://db.onlinewebfonts.com/c/9d4d074c9335825a23cce178ee03b498?family=P22+Mackinac+W01+Book') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-sans: 'Inter', sans-serif;
+  --font-serif: 'P22 Mackinac W01 Book', Georgia, serif;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: #191919;
+  background-color: #FFFFFF;
+}
+
+@keyframes ticker-right-to-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes ticker-left-to-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-rail-rtl {
+  display: flex;
+  width: max-content;
+  animation: ticker-right-to-left 42s linear infinite;
+  will-change: transform;
+}
+
+.animate-rail-ltr {
+  display: flex;
+  width: max-content;
+  animation: ticker-left-to-right 42s linear infinite;
+  will-change: transform;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .animate-rail-rtl:hover,
+  .animate-rail-ltr:hover {
+    animation-play-state: paused;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-rail-rtl,
+  .animate-rail-ltr {
+    animation: none !important;
+    transform: none !important;
+    overflow-x: auto;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
