@@ -1,6 +1,6 @@
 {
   "name": "FYSH",
-  "description": "Conversational AI platform for modern financial institutions.",
+  "description": "FYSH (فيش): منصة عربية مبسطة لربط التطبيقات والخدمات بحساب واحد عبر Composio.",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
